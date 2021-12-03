@@ -34,16 +34,22 @@ except Exception as er:
 
 @bot.on(events.NewMessage(pattern="/start"))
 async def _(e):
+    if str(e.sender_id) not in OWNER and e.sender_id !=DEV:
+        return e.reply("**Sorry You're not An Authorised User!**")
     await start(e)
 
 
 @bot.on(events.NewMessage(pattern="/ping"))
 async def _(e):
+    if str(e.sender_id) not in OWNER and e.sender_id !=DEV:
+        return e.reply("**Sorry You're not An Authorised User!**")
     await up(e)
 
 
 @bot.on(events.NewMessage(pattern="/help"))
 async def _(e):
+    if str(e.sender_id) not in OWNER and e.sender_id !=DEV:
+        return e.reply("**Sorry You're not An Authorised User!**")
     await help(e)
 
 
@@ -156,7 +162,7 @@ async def something():
                 er = stderr.decode()
                 try:
                     if er:
-                        await e.edit(str(er) + "\n\n**ERROR** Contact @danish_00")
+                        await e.edit(str(er) + "\n\n**ERROR**")
                         QUEUE.pop(list(QUEUE.keys())[0])
                         os.remove(dl)
                         os.remove(out)
